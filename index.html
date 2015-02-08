@@ -148,7 +148,7 @@
 				<input type="file" id = "userPhoto" accept="image/*;capture=camera"></canvas> -->
 			<img src="images.jpeg" width = "300" height = "300">
 			
-			<ul data-role = "listview" data-autodividers = "true" data-inset = "true" id = "profileList">
+			<ul data-role = "listview" id = "profileList">
 			</ul>
 			<div id ="schedule">
 				<center>
@@ -176,9 +176,11 @@
 					<option>AP Statistics</option>
 				</select>
 				<button id = "addclass_button" onclick = "addClass()">Add a Class</button>
+				<br>
 				<ul data-role = "listview" id = "schedule_list">
 				</ul>
-				<button id = "finishschedule_button" onclick = "finishSchedule()">Finish Schedule</button>
+				<br>
+				<button id = "finishschedule_button" onclick = "finishSchedule()" href="#profilePage">Finish Schedule</button>
 			</center>
 		</div>
 	</div>

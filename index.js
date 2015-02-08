@@ -1,9 +1,10 @@
-var signup_username;
+var signup_username = "";
 var signup_school;
 var signup_password;
 var signup_email;
 var signup_first;
 var signup_last;
+var user_id;
 
 var profile_setup = false;
 var class_added = false;
@@ -19,13 +20,14 @@ $(function(){
 function setUpProfile(){
 	$("#profileList").append("<li>"+ signup_first + "  "+ signup_last +"</li>");
 	$("#profileList").append("<li>"+ signup_school +"</li>");
-	$("#profileList").trigger('create');
+	$("#profileList").listview('refresh');
 }
 
 function addClass(){
-	var class_ = $("#class_select").text();
-	schedule.push(class_);
-	$("#schedule_list").append('<li>'+class_+'</li>');
+	var class_ = $("#class_select option:selected").html();
+	schedule.push(class_+"|");
+	$("#schedule_list").append('<li style="margin-right:25%;margin-left:25%;"><center>'+class_+'</center></li>');
+	$("#schedule_list").listview('refresh');
 }
 
 function finishSchedule(){
@@ -35,10 +37,11 @@ function finishSchedule(){
 	schedule_.set("class", schedule[0]);
 	schedule_.set("user",user);
 	for(var i = 1; i < schedule.length; i++){
-		schedule.add("class", schedule[1]);
+		schedule_.add("class", schedule[1]);
 	}
-	schedule.save(null, {
+	schedule_.save(null, {
 		success:function(schedule){
+			alert("schedule created");
 			$("#schedule").hide();
 		},
 		error:function(schedule, erro){
@@ -66,7 +69,7 @@ function checkSignUp(){
 		alert("Sorry, reenter your username and password");
 	}
 	else{
-		Parse.User.logIn(name, pass, {
+		var login_user = Parse.User.logIn(name, pass, {
   		success: function(user) {
   			alert("Welcome", name);
     		$.mobile.changePage("#feed");
@@ -76,6 +79,13 @@ function checkSignUp(){
 		  }
 		});
 	}
+	var currentUser = Parse.User.current();
+	if (currentUser) {
+
+    	console.log(currentUser);
+	} else {
+   		console.log("dps");
+	}
 }
 
 function newUser(){
@@ -84,9 +94,10 @@ function newUser(){
 	var signup_first = $("#signup_first").val();
 	var signup_last = $("#signup_last").val();
 	var signup_username = $("#signup_name").val();
+	console.log(signup_username);
 	var signup_password = $("#signup_password").val();
 	var signup_email = $("#signup_email").val();
-	var signup_school = $("#dropdown").text();
+	var signup_school = $("#dropdown option:selected").html();
 
 	if(signup_name === null || signup_school === null || signup_email === null || signup_password === null){
 		alert("Some fields were not inputted correctly");
@@ -94,7 +105,7 @@ function newUser(){
 
 	user.set("first_name", signup_first);
 	user.set("last_name", signup_last);
-	user.set("username", signup_name);
+	user.set("username", signup_username);
 	user.set("password", signup_password);
 	user.set("email", signup_email);
 	user.set("school", signup_school);
@@ -146,7 +157,6 @@ function getData(){
 	    	$("#dropdown_div").show();
 	    	schoolList = data.result.records;
 	    	//console.log(schoolList[1]["SCHNAM09"]);
-	    	$("#dropdown").append('<option value=""></option>');
 	    	for(var i = 0; i < schoolList.length; i++){
 	    		$("#dropdown").append('<option value="'+i+'">'+schoolList[i]["SCHNAM09"]+'</option>');
 	    	}
