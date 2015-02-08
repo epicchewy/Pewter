@@ -1,9 +1,0 @@
-{
-  "firebase": "pewter",
-  "public": "Pewter",
-  "ignore": [
-    "firebase.json",
-    "**/.*",
-    "**/node_modules/**"
-  ]
-}
