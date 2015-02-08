@@ -20,7 +20,7 @@ $(function(){
 
 function setUpProfile(){
 	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Name: "+ signup_first + "  "+ signup_last +"</center></li>");
-	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Email: "+ signup_school+"</li>");
+	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>School: "+ signup_school+"</li>");
 	$("#profileList").listview('refresh');
 }
 
@@ -214,17 +214,23 @@ function loadNewsFeed(){
 				var post_ID = data[i].id;
 				var question = data[i].attributes.question;
 				var index = i;
-				$("#feedlist").append("<li data-role = 'collapsible'><h1>"+data[i].attributes.class_ +"</h1><ul data-role='listview' id = 'feedlist2'><li>"+ data[i].attributes.question+"</li></ul><div data-role='fieldcontain'><label for='textarea'>Answer:</label><textarea cols='40' rows='8' name='textarea' id='post_answer"+i+"'></textarea></div> <button id = 'push_answer_"+i+"'>Answer</button></li>");
+				$("#feedlist").append("<li data-role = 'collapsible'><h1>"+data[i].attributes.class_ +"</h1><ul data-role='listview' id = 'feedlist2'><li>"+ data[i].attributes.question+"</li><li data-role = 'collapsible' id = 'answers"+i+"'><h1>Other Answers</h1></li></ul><br><div data-role='fieldcontain'><label for='textarea'>Answer:</label><textarea cols='40' rows='8' name='textarea' id='post_answer"+i+"'></textarea></div> <button id = 'push_answer_"+i+"'>Answer</button></li>");
 
 				$("#push_answer_" + index).on('click', function() {
 					var answer = $("textarea#post_answer" + index).val();
        				pushAnswer(post_ID, index, question,answer);
    				});
 
+				$("#answers"+index).append("<ul data-role='list-view' id = 'unordered_answers"+index+"'></ul>");
+				for(var k = 0; k < data[index].attributes.answers.length; k++){
+					console.log(data[index].attributes.answers[k]);
+					$("#unordered_answers"+index).append("<li>"+data[index].attributes.answers[k]+"</li>");
+					
+				}
+				$("#unordered_answers"+index).listview('refresh');
 			}
 			$("#feedlist2").listview('refresh');
 			$("#feedlist").listview('refresh');
-			
 		}
 	});
 }
@@ -238,7 +244,7 @@ function pushAnswer(ID, val, question,answer){
 			result[0].add("answers",answer);
 			result[0].save({
 				success:function(data){
-					
+
 				},
 				error:function(error){
 				}
