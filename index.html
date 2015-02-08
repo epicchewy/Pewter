@@ -30,11 +30,48 @@
 					<input type="text" name="name" id="password" value="">
 				</div>
 			</center>
-			<!-- <center><a href="#" data-role="button" data-inline="true" onclick ="checkSignUp()">Login</a></center> -->
-			<center><a href="#feed" data-role="button" data-inline="true" onclick ="">Login</a></center>
-			<center><a href="#feed" data-role="button" data-inline="true" onclick ="newUser()">Sign up!</a></center>
+			<center><a href="#" data-role="button" data-inline="true" onclick ="checkSignUp()">Login</a></center>
+			<!-- <center><a href="#feed" data-role="button" data-inline="true" onclick ="">Login</a></center> -->
+			<center><a href="#signUpPage" data-role="button" data-inline="true">Sign up!</a></center>
 			
 		</div>	
+	</div>
+
+	<div data-role = "page" id = "signUpPage">
+		<div data-role = "header">
+			<a href="#loginPage" class="ui-btn" data-icon = "arrow-l">Back</a>
+			<h1>New User</h1>
+		</div>
+		<div data-role = "main" id = "signUpContent">
+			<center>
+				<div class="ui-field-contain">
+					<label for="name">Username:</label>
+					<input type="text" name="name" id="signup_name" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
+					<label for="name">Password: </label>
+					<input type="text" name="name" id="signup_password" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
+					<label for="name">Email: </label>
+					<input type="text" name="name" id="signup_email" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
+					<label for="name">School: </label>
+					<input type="text" name="name" id="signup_school" value="School's First Word">
+					<br><br>
+					<center><a href="#" data-role="button" id = "searchSchoolButton" onclick = "getData()">Search School</a></center>
+					<img src="searching.png" width="300" height="126" id = "searchingPicture" />
+					<center><div data-role = "main" class = "ui-content" id = "dropdown_div"><select id = "dropdown"></select><div></center>
+				</div>
+				<a href="#" data-role = "button" data-inline = "true" onclick="newUser()">Sign Up to Pewter</a>
+			</center>
+
+		</div>
+
 	</div>
 
 	<div data-role = "page" id = "setUpPage" data-theme="a">
@@ -49,7 +86,7 @@
 	<div data-role="page" id = "menuPage">
 		<div data-role = "header">
 			<h1>Menu</h1>
-			<a href="#feed" class="ui-btn-right ui-shadow ui-icon-arrow-r ui-btn-icon-right">News Feed</a>
+			<a href="#feed" class="ui-btn ui-shadow ui-icon-arrow-r ui-btn-icon-right">News Feed</a>
 		</div>
 		<div data-role = "main" class = "ui-cotent" id = "menuContent">
 			<form class="ui-filterable">

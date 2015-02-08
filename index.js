@@ -1,6 +1,13 @@
+var signup_name;
+var signup_school;
+var signup_password;
+var signup_email;
+
 $(function(){
+	$("#searchingPicture").hide();
+	$("#dropdown_div").hide();
 	console.log("ready");
-	// Parse.initialize("LgTg5AVdGDTKIZMxHfH4pcV4T2oqJ2zExTtRhrXH", "mc1hMF35qXQKJ52mRX4yDOleJObeUjAWPD3ha1qd");
+	Parse.initialize("LgTg5AVdGDTKIZMxHfH4pcV4T2oqJ2zExTtRhrXH", "mc1hMF35qXQKJ52mRX4yDOleJObeUjAWPD3ha1qd");
  //    var TestObject = Parse.Object.extend("TestObject");
  //    var testObject = new TestObject();
  //      testObject.save({foo: "bar"}, {
@@ -15,16 +22,26 @@ $(function(){
 });
 
 function setUpProfile(){
-
+	var query = new Parse.Query(Parse.User);
+	query.equalTo("school", signup_school);
+	query.find({
+		success: function(data){
+			console.log(data);
+			
+		}
+	});
 }
 
 function openPanel(){
 	$( "#feedpanel" ).panel( "open");
 }
 
+//Sign UP
+
 function checkSignUp(){
 	var pass = $("#password").val();
 	var name = $("#name").val();
+	console.log(pass + "    name: " + name);
 	if((name === null) || (pass === null)){
 		alert("Sorry, reenter your username and password");
 	}
@@ -43,16 +60,24 @@ function checkSignUp(){
 
 function newUser(){
 	var user = new Parse.User();
-	user.set("username", "my name");
-	user.set("password", "my pass");
-	user.set("email", "email@example.com");
-	  
-	// other fields can be set just like with Parse.Object
-	user.set("phone", "650-555-0000");
-	  
+
+	var signup_name = $("#signup_name").val();
+	var signup_password = $("#signup_password").val();
+	var signup_email = $("#signup_email").val();
+	var signup_school = $("#dropdown").val();
+
+	if(signup_name === null || signup_school === null || signup_email === null || signup_password === null){
+
+	}
+	user.set("username", signup_name);
+	user.set("password", signup_password);
+	user.set("email", signup_email);
+	user.set("school", signup_school);
+	
 	user.signUp(null, {
 	  success: function(user) {
 	  	alert("Welcome to Pewter");
+    	$.mobile.changePage("#feed");
 	    console.log("NICCEEE");// Hooray! Let them use the app now.
 	  },
 	  error: function(user, error) {
@@ -62,9 +87,55 @@ function newUser(){
 	});
 }
 
+//High School Search
 
-//inith heroku comit
+var name = "";
 
+function getSchool(){
+	console.log("School...");
+	name = $("#signup_school").val();
+}
+
+function getData(){
+	getSchool();
+	var schoolList = [];
+	console.log(name);
+	console.log("searching");
+	var data = {
+    	resource_id: '102fd9bd-4737-401b-b88f-5c5b0fab94ec', // the resource id
+    	limit: 15, // get 5 results
+    	q: name // query for 'jones'
+ 	}; 	
+ 	$.ajax({
+ 		beforeSend: function(){
+ 			$("#searchingPicture").show();
+ 		},
+	    url: 'https://inventory.data.gov/api/action/datastore_search',
+	    data: data,
+	    dataType: 'jsonp',
+	    success: function(data) {
+	    	console.log(data);
+	    	$("#searchingPicture").hide();
+	    	$("#dropdown_div").show();
+	    	schoolList = data.result.records;
+	    	//console.log(schoolList[1]["SCHNAM09"]);
+	    	$("#dropdown").append('<option value=""></option>');
+	    	for(var i = 0; i < schoolList.length; i++){
+	    		$("#dropdown").append('<option value="'+i+'">'+schoolList[i]["SCHNAM09"]+'</option>');
+	    	}
+	    },
+	    error: function(error){
+	    	$("#searchingPicture").hide();
+	    	alert("Couldn't find school");
+	    }
+  	});
+}
+
+//newfeed calls
+
+function loadNewsFeed(){
+
+}
 
 //Company:
 
