@@ -227,9 +227,10 @@ function loadNewsFeed(){
 					$("#unordered_answers"+index).append("<li>"+data[index].attributes.answers[k]+"</li>");
 					
 				}
+				$("#feedlist2").listview('refresh');
 				$("#unordered_answers"+index).listview('refresh');
 			}
-			$("#feedlist2").listview('refresh');
+			
 			$("#feedlist").listview('refresh');
 		}
 	});
