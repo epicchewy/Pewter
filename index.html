@@ -102,7 +102,7 @@
 	    	</form>
 			<ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true"></ul>
 	    	<ul data-role="listview">
-	      		<li><a href="#profilePage">Profile</a></li>
+	      		<li><a href="#profilePage" onclick = "setUpProfile()">Profile</a></li>
 		      	<li><a href="#schoolPage">School Profile</a></li>
 			    <li><a href="#notificationPage">Notifications<span class="ui-li-count">25</span></a></li>
 			    <li><a href="#activityPage">Activity Log<span class="ui-li-count">432</span></a></li>
@@ -147,9 +147,10 @@
 <!-- 			<canvas>
 				<input type="file" id = "userPhoto" accept="image/*;capture=camera"></canvas> -->
 			<img src="images.jpeg" width = "300" height = "300">
-			
+			<br><br>
 			<ul data-role = "listview" id = "profileList">
 			</ul>
+			<br><br>
 			<div id ="schedule">
 				<center>
 					<a href="#schedulePage" class = "ui-btn" id = "schedule_button">Add your Schedule</a>

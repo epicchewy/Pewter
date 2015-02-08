@@ -18,8 +18,8 @@ $(function(){
 });
 
 function setUpProfile(){
-	$("#profileList").append("<li>"+ signup_first + "  "+ signup_last +"</li>");
-	$("#profileList").append("<li>"+ signup_school +"</li>");
+	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Name: "+ signup_first + "  "+ signup_last +"</center></li>");
+	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Email: "+ signup_school+"</li>");
 	$("#profileList").listview('refresh');
 }
 
@@ -81,8 +81,9 @@ function checkSignUp(){
 	}
 	var currentUser = Parse.User.current();
 	if (currentUser) {
-
-    	console.log(currentUser);
+		signup_first = currentUser.attributes.first_name;
+		signup_last = currentUser.attributes.last_name;
+		signup_school = currentUser.attributes.school;
 	} else {
    		console.log("dps");
 	}
