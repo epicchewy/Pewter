@@ -27,7 +27,6 @@ function setUpProfile(){
 	query.find({
 		success: function(data){
 			console.log(data);
-			
 		}
 	});
 }
@@ -64,10 +63,10 @@ function newUser(){
 	var signup_name = $("#signup_name").val();
 	var signup_password = $("#signup_password").val();
 	var signup_email = $("#signup_email").val();
-	var signup_school = $("#dropdown").val();
+	var signup_school = $("#dropdown").text();
 
 	if(signup_name === null || signup_school === null || signup_email === null || signup_password === null){
-
+		alert("Some fields were not inputted correctly");
 	}
 	user.set("username", signup_name);
 	user.set("password", signup_password);
