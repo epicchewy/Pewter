@@ -45,6 +45,16 @@
 		<div data-role = "main" id = "signUpContent">
 			<center>
 				<div class="ui-field-contain">
+					<label for="name">First Name:</label>
+					<input type="text" name="name" id="signup_first" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
+					<label for="name">Last Name:</label>
+					<input type="text" name="name" id="signup_last" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
 					<label for="name">Username:</label>
 					<input type="text" name="name" id="signup_name" value="">
 				</div>
@@ -78,9 +88,7 @@
 		<div data-role ="header"> 
 			<h1>Profile</h1>
 		</div>
-		<div data-role = "content" id = "profileContent" data-theme = "a">
-			
-		</div>
+		
 	</div>
 
 	<div data-role="page" id = "menuPage">
@@ -134,23 +142,46 @@
    			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left" data-rel="back">Back</a>
    			<h1>Profile</h1>
 	 	</div>
-	  	<div data-role="main" class="ui-content">
-	    	<p>I Am Now A Mobile Developer!!</p>
-	  	</div>
-		<div data-role="footer">
-	    	<h1>Skills</h1>
-	  	</div>
-
-	 	<div data-role="main" class="ui-content">
-	    	<p>(Ex. Biology, Math)</p>
-	 	</div>
-	 	<div data-role="footer">
-	    	<h1>Grade</h1>
-	  	</div>
-	 	<div data-role="main" class="ui-content">
-	   		<p>(Ex. 12)</p>
-	 	</div>
+	  	<div data-role = "content" id = "profileContent" data-theme = "a">
+			<center>
+<!-- 			<canvas>
+				<input type="file" id = "userPhoto" accept="image/*;capture=camera"></canvas> -->
+			<img src="images.jpeg" width = "300" height = "300">
+			
+			<ul data-role = "listview" data-autodividers = "true" data-inset = "true" id = "profileList">
+			</ul>
+			<div id ="schedule">
+				<center>
+					<a href="#schedulePage" class = "ui-btn" id = "schedule_button">Add your Schedule</a>
+				</center>
+			</div>
+		</center>
+		</div>
 	</div> 
+
+	<div data-role = "page" id = "schedulePage">
+		<div data-role = "header">
+			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left" data-rel="back">Back</a>
+			<h1>Add Schedule</h1>
+		</div>
+		<div data-role = "main" class = "ui-content">
+			<center>
+				<select id = "class_select">
+					<option></option>
+					<option>AP Biology</option>
+					<option>AP Chemistry</option>
+					<option>AP Physics C</option>
+					<option>BC Calculus</option>
+					<option>AP Computer Science</option>
+					<option>AP Statistics</option>
+				</select>
+				<button id = "addclass_button" onclick = "addClass()">Add a Class</button>
+				<ul data-role = "listview" id = "schedule_list">
+				</ul>
+				<button id = "finishschedule_button" onclick = "finishSchedule()">Finish Schedule</button>
+			</center>
+		</div>
+	</div>
 
 	<div data-role = "page" id = "schoolPage">
   		<div data-role = "header">
@@ -189,6 +220,7 @@
   			<h1>Recommendations</h1>
   		</div>
   		<div data-role = "main" class = "ui-content" id = "recommendationPage">
+
   		</div>
   	</div>
 </body>
