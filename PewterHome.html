@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="panel" id="myPanel"> 
+ <form class="ui-filterable">
+      <input id="myFilter" data-type="search">
+    </form>
+    <ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true">
+    <ul data-role="listview" data-inset="true">
+    <li><a href="#profile">Profile</a></li>
+      <li><a href="#">School Profile</a></li>
+      <li><a href="#">Notifications<span class="ui-li-count">25</span></a></li>
+      <li><a href="#">Activity Log<span class="ui-li-count">432</span></a></li>
+      <li><a href="#">Recommendations</a></li>
+
+    </ul>
+  </div> 
+
+  <div data-role="header">
+  <a href="#myPanel" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext">Menu</a>   
+ <h1>Pewter</h1>
+  <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-comment ui-btn-icon-notext">Chat</a>
+  </div>
+
+ 
+  <div data-role="main" class="ui-content">
+    <form method="post" action="demoform.asp">
+      <div class="ui-field-contain">
+        <label for="info">What Do You Need Help On?:</label>
+        <textarea name="addinfo" id="info"></textarea>
+      </div>
+      <input type="submit" data-inline="true" value="Submit">
+    </form> 
+  </div>
+
+</div> 
+
+<div data-role="page" id="profile">
+  <div data-role="header">
+  <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext">Menu</a>
+    <h1>Profile</h1>
+  <a href="#" class="ui-btn ui-shadow ui-corner-all ui-icon-home ui-btn-icon-notext">Home</a>
+  </div>
+
+
+  <div data-role="main" class="ui-content">
+    <p>I Am Now A Mobile Developer!!</p>
+  </div>
+
+<div data-role="footer">
+    <h1>Skills</h1>
+  </div>
+
+ <div data-role="main" class="ui-content">
+    <p>(Ex. Biology, Math)</p>
+  </div>
+
+  <div data-role="footer">
+    <h1>Grade</h1>
+  </div>
+
+ <div data-role="main" class="ui-content">
+    <p>(Ex. 12)</p>
+  </div>
+
+</div> 
+
+
+</body>
+</html>
