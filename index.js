@@ -74,6 +74,7 @@ function checkSignUp(){
   		success: function(user) {
   			alert("Welcome", name);
     		$.mobile.changePage("#feed");
+
   		},
 		  error: function(user, error) {
 		    alert("Sorry: ", error.message);
@@ -88,6 +89,7 @@ function checkSignUp(){
 	} else {
    		console.log("dps");
 	}
+	loadNewsFeed();
 }
 
 function newUser(){
@@ -118,6 +120,7 @@ function newUser(){
 	  success: function(user) {
 	  	alert("Welcome to Pewter");
     	$.mobile.changePage("#feed");
+    	loadNewsFeed();
 	    console.log("NICCEEE");// Hooray! Let them use the app now.
 	  },
 	  error: function(user, error) {
@@ -171,6 +174,30 @@ function getData(){
 }
 
 //newfeed calls
+
+function pushQuestion(){
+	var current = Parse.User.current();
+
+	var Post = Parse.Object.extend("Post");
+	var post = new Post();
+	var class_ = $("#question_subject").val();
+	var question = $("textarea#question_text").val();
+
+	post.set("class_", class_);
+	post.set("question", question);
+	post.set("user", current);
+	post.save(null, {
+		success:function(post){
+			alert("You have asked your question");
+		},
+		error:function(error){
+			alert("oh shit homie");
+		}
+	});
+	$.mobile.changePage("#feed");
+	$("#question_subject").val() = "";
+	$("textarea#question_text").val() = "";
+}
 
 function loadNewsFeed(){
 	var query = new Parse.Query(Parse.User);

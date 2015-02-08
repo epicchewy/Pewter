@@ -124,9 +124,33 @@
 			<a href="#" class="ui-btn-right ui-shadow ui-icon-home ui-btn-icon-notext" onclick = "openPanel()">Options</a>
 		</div>
 		<div data-role = "main" class = "ui-content" id ="feedContent">
-			
+			<center id ="centerFeedContent">
+				<a href ="#askQuestionPage" class= "ui-btn">Ask a Question</a>
+
+			</center>
+
 		</div>
 	</div> 
+
+	<div data-role = "page" id = "askQuestionPage">
+		<div data-role ="header">
+			<a href="#feed" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left" data-rel="back">Back</a>
+			<h1>Ask a Question</h1>
+		</div>
+		<div data-role = "main" class = "ui-content">
+			<div data-role="fieldcontain">
+    			<label for="name">Class for Question:</label>
+    			<input type="text" name="name" id="question_subject" value="" />
+			</div>	
+			<div data-role="fieldcontain">
+				<label for="textarea">Question:</label>
+				<textarea cols="40" rows="8" name="textarea" id="question_text"></textarea>
+			</div>
+			<button class = "ui-btn" onclick= "pushQuestion()">Ask your Question</button>
+		</div>
+
+	</div>
+
 	<div data-role = "page" id = "chatPage" data-theme = "a">
 		<div data-role = "header">
 			<a href="#feed" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left" data-rel="back">Back to Feed</a>
