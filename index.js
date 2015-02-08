@@ -23,6 +23,10 @@ function setUpProfile(){
 	$("#profileList").listview('refresh');
 }
 
+function takePhoto(){
+	//use phone camera to get prof pic
+}
+
 function addClass(){
 	var class_ = $("#class_select option:selected").html();
 	schedule.push(class_+"|");
@@ -48,12 +52,8 @@ function finishSchedule(){
 			alert(error);
 		}
 	});
-
 }
 
-function takePhoto(){
-	//use phone camera to get prof pic
-}
 
 function openPanel(){
 	$( "#feedpanel" ).panel( "open");
@@ -182,26 +182,49 @@ function loadNewsFeed(){
 	});
 }
 
-//Company:
+function loadActivityFeed(){
 
-// Pewter
+}
 
-// Application Name:
+function loadNotifications(){
 
-// Pewter
+}
 
-// API Key:
+function loadSchoolProfile(){
 
-// 75wkul18hlrqm1
+}
 
-// Secret Key:
+//
 
-// 2tCQoiB8OAnCZHBz
+function startChat(){
+	var options = {
+		email: signup_email,
+	    iframe: false,
+	    tagid4iframe: "#chatFrame",
+	    iframewidth: "920px",
+	    iframeheight: "650px",
+	    autostart_meet: false,
+	    autostart_note: false,
+	    start_chat: function(event) {
+	        alert("Chat started session Id: " + event.session_id);
+	    },
+	    start_meet: function(event) {
+	        alert("Meet started session key: " + event.session_key + " session id: " + event.session_id);
+	    },
+	    end_meet: function(event) {
+	        alert("Meet end event");
+	    },
+	    invite_member: function(event) {
+	        alert("Invite member into binder Id: " + event.binder_id);
+	    },
+	    request_note: function(event) {
+	        alert("Note start request");
+	    },
+	    error: function(event) {
+	        alert("Chat error code: " + event.error_code + " error message: " + event.error_message);
+	    }
+	};
+	Moxtra.chat(options);
+}
 
-// OAuth User Token:
-
-// 958b1a1e-a845-4143-924b-8d1d89564a2f
-
-// OAuth User Secret:
-
-// 64b0473a-4b5a-4fda-9a72-626475ecdaf2
+//Company: Pewter
