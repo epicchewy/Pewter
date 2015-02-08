@@ -13,12 +13,27 @@
 <body>
 	<div data-role = "page" id = "loginPage" data-theme="a">
 		<div data-role ="header"> 
-			<h1>Login with LinkedIn!</h1>
+			<h1>Login to Pewter</h1>
 		</div>
 		<div data-role = "content" id = "loginContent" data-theme = "a">
-			<center><script type="IN/Login"></script></center>
-			<p> linkedin integration</p>
-			<a href="#feed" data-role="button" data-inline="true">Login</a>
+			<center><h1>
+				Log In with your Pewter Username or personal Email or sign up below!
+			</h1><center>
+			<center>
+				<div class="ui-field-contain">
+					<label for="name">Username or Email:</label>
+					<input type="text" name="name" id="name" value="">
+				</div>
+				<br>
+				<div class="ui-field-contain">
+					<label for="name">Password: </label>
+					<input type="text" name="name" id="password" value="">
+				</div>
+			</center>
+			<!-- <center><a href="#" data-role="button" data-inline="true" onclick ="checkSignUp()">Login</a></center> -->
+			<center><a href="#feed" data-role="button" data-inline="true" onclick ="">Login</a></center>
+			<center><a href="#feed" data-role="button" data-inline="true" onclick ="newUser()">Sign up!</a></center>
+			
 		</div>	
 	</div>
 
@@ -27,44 +42,57 @@
 			<h1>Profile</h1>
 		</div>
 		<div data-role = "content" id = "profileContent" data-theme = "a">
-			<p>hi</p>
+			
 		</div>
 	</div>
 
-	<div >
+	<div data-role="page" id = "menuPage">
+		<div data-role = "header">
+			<h1>Menu</h1>
+			<a href="#feed" class="ui-btn-right ui-shadow ui-icon-arrow-r ui-btn-icon-right">News Feed</a>
+		</div>
+		<div data-role = "main" class = "ui-cotent" id = "menuContent">
+			<form class="ui-filterable">
+	    		<input id="myFilter" data-type="search">
+	    	</form>
+			<ul data-role="listview" data-filter="true" data-input="#myFilter" data-autodividers="true" data-inset="true"></ul>
+	    	<ul data-role="listview">
+	      		<li><a href="#profilePage">Profile</a></li>
+		      	<li><a href="#schoolPage">School Profile</a></li>
+			    <li><a href="#notificationPage">Notifications<span class="ui-li-count">25</span></a></li>
+			    <li><a href="#activityPage">Activity Log<span class="ui-li-count">432</span></a></li>
+			    <li><a href="#recommendationPage">Recommendations</a></li>
+	    	</ul>
+		</div>
+  	</div>
 
-	</div>
-
-	<div data-role = "page" id = "feed" data-theme = "a">
+  	<div data-role = "page" id = "feed" data-theme = "a">
 		<div data-role="panel" id="feedpanel" data-position="right" data-display="push" data-theme = "b">
 			<div class = "ui-panel-inner">
 				<center><h1>Options</h1></center>
     			<a href="#profilepage" class="ui-btn">Profile</a>
-				<a href="#chatPage" class="ui-btn">Chat</a>
+				<a href="#chatPage" class="ui-btn">Collaborate</a>
 			</div>
 		</div>
 		<div data-role = "header">
+			<a href="#menuPage" class="ui-btn ui-shadow ui-corner-all ui-icon-bars ui-btn-icon-notext"></a>
 			<h1>Pewter</h1>
-			<br>
-				<br>
-				<br>
-				<br>
-				<br>
-			<a href="#" class="ui-btn-right ui-shadow ui-icon-arrow-r ui-btn-icon-right" onclick = "openPanel()">Options</a>
+			<a href="#" class="ui-btn-right ui-shadow ui-icon-home ui-btn-icon-notext" onclick = "openPanel()">Options</a>
 		</div>
-
 		<div data-role = "main" class = "ui-content" id ="feedContent">
 			
 		</div>
 	</div> 
 	<div data-role = "page" id = "chatPage" data-theme = "a">
 		<div data-role = "header">
-			<h1>Choose Chat</h1>
+			<h1>Choose Chat by Subject</h1>
 		</div>
+		<div data-role ="main" class ="ui-content" id = "chatPageContent">
 
+		</div>
 	</div>
 
-	<div data-role="page" id = "profilepage">
+	<div data-role="page" id = "profilePage">
   		<div data-role="header">
    			<a href="#" class="ui-btn ui-corner-all ui-shadow ui-icon-arrow-l ui-btn-icon-left" data-rel="back">Back</a>
    			<h1>Profile</h1>
@@ -86,39 +114,41 @@
 	   		<p>(Ex. 12)</p>
 	 	</div>
 	</div> 
-	<script type="text/javascript">
-	    Parse.initialize("LgTg5AVdGDTKIZMxHfH4pcV4T2oqJ2zExTtRhrXH", "mc1hMF35qXQKJ52mRX4yDOleJObeUjAWPD3ha1qd");
-	    var TestObject = Parse.Object.extend("TestObject");
-	    var testObject = new TestObject();
-	      testObject.save({foo: "bar"}, {
-	      success: function(object) {
-	        alert('successs');
-	      },
-	      error: function(model, error) {
-	        alert(error);
-	      }
-	    });
-	    var user = new Parse.User();
-		user.set("username", "my name");
-		user.set("password", "my pass");
-		user.set("email", "email@example.com");
-		  
-		// other fields can be set just like with Parse.Object
-		user.set("phone", "650-555-0000");
-		  
-		user.signUp(null, {
-		  success: function(user) {
-		    console.log("NICCEEE");// Hooray! Let them use the app now.
-		  },
-		  error: function(user, error) {
-		    // Show the error message somewhere and let the user try again.
-		    alert("Error: " + error.code + " " + error.message);
-		  }
-		});
-  </script>
+
+	<div data-role = "page" id = "schoolPage">
+  		<div data-role = "header">
+  			<h1>School</h1>
+  		</div>
+  		<div data-role = "main" class = "ui-content" id = "schoolPage">
+  			
+  		</div>
+  	</div>
+
+  	<div data-role = "page" id = "activityPage">
+  		<div data-role = "header">
+  			<h1>Activity Log</h1>
+  		</div>
+  		<div data-role = "main" class = "ui-content" id = "activityContent">
+  			<ul data-role="listview" id = "activityContentList">
+		    </ul>
+  		</div>
+  	</div>
+
+  	<div data-role = "page" id = "notificationPage">
+  		<div data-role = "header">
+  			<h1>Notifications</h1>
+  		</div>
+  		<div data-role = "main" class = "ui-content" id = "notificationContent">
+  			<ul data-role="listview" id = "notificationContentList">
+		    </ul>
+  		</div>
+  	</div>
+  	<div data-role = "page" id = "recommendationPage">
+  		<div data-role = "header">
+  			<h1>Recommendations</h1>
+  		</div>
+  		<div data-role = "main" class = "ui-content" id = "recommendationPage">
+  		</div>
+  	</div>
 </body>
-
-
-
 </html>
-
