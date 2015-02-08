@@ -182,11 +182,12 @@ function pushQuestion(){
 	var post = new Post();
 	var class_ = $("#question_subject").val();
 	var question = $("textarea#question_text").val();
-
+	var answers = [];
 	post.set("class_", class_);
 	post.set("question", question);
 	post.set("school", signup_school);
 	post.set("user", current);
+	post.set("answers", answers);
 	post.save(null, {
 		success:function(post){
 			alert("You have asked your question");
@@ -210,15 +211,42 @@ function loadNewsFeed(){
 			for(var i = 0; i < data.length; i++){
 				console.log(data[0].attributes.class_);
 				console.log(data[0].attributes.question);
-				$("#feedlist").append("<li data-role = 'collapsible'><h1>"+data[i].attributes.class_ +"</h1><ul data-role='listview' id = 'feedlist2'><li>"+ data[i].attributes.question+"</li></ul><div data-role='fieldcontain'><label for='textarea'>Answer:</label><textarea cols='40' rows='8' name='textarea' id='textarea'></textarea></div> <button onclick='pushAnswer()'>Answer</button></li>");
+				var post_ID = data[i].id;
+				var question = data[i].attributes.question;
+				var index = i;
+				$("#feedlist").append("<li data-role = 'collapsible'><h1>"+data[i].attributes.class_ +"</h1><ul data-role='listview' id = 'feedlist2'><li>"+ data[i].attributes.question+"</li></ul><div data-role='fieldcontain'><label for='textarea'>Answer:</label><textarea cols='40' rows='8' name='textarea' id='post_answer"+i+"'></textarea></div> <button id = 'push_answer_"+i+"'>Answer</button></li>");
+
+				$("#push_answer_" + index).on('click', function() {
+					var answer = $("textarea#post_answer" + index).val();
+       				pushAnswer(post_ID, index, question,answer);
+   				});
+
 			}
-			$("#feedlist").listview('refresh');
 			$("#feedlist2").listview('refresh');
+			$("#feedlist").listview('refresh');
+			
 		}
 	});
 }
 
-function pushAnswer(){
+function pushAnswer(ID, val, question,answer){
+	var Post = Parse.Object.extend("Post");
+	var query = new Parse.Query(Post);
+	query.equalTo("question", question);
+	query.find({
+		success:function(result){
+			result[0].add("answers",answer);
+			result[0].save({
+				success:function(data){
+					
+				},
+				error:function(error){
+				}
+			});
+		},
+		error:function(error){
+		}
+	});
 	alert("answer pushed");
 }
 
