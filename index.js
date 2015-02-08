@@ -1,3 +1,8 @@
+var signup_name;
+var signup_school;
+var signup_password;
+var signup_email;
+
 $(function(){
 	$("#searchingPicture").hide();
 	$("#dropdown_div").hide();
@@ -17,7 +22,14 @@ $(function(){
 });
 
 function setUpProfile(){
-
+	var query = new Parse.Query(Parse.User);
+	query.equalTo("school", signup_school);
+	query.find({
+		success: function(data){
+			console.log(data);
+			
+		}
+	});
 }
 
 function openPanel(){
@@ -117,6 +129,12 @@ function getData(){
 	    	alert("Couldn't find school");
 	    }
   	});
+}
+
+//newfeed calls
+
+function loadNewsFeed(){
+
 }
 
 //Company:
