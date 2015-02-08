@@ -1,6 +1,11 @@
 $(function(){
 	console.log("ready");
+	
 });
+
+function openPanel(){
+	$( "#feedpanel" ).panel( "open");
+}
 
 //inith heroku comit
 
