@@ -5,6 +5,7 @@ var signup_email;
 var signup_first;
 var signup_last;
 var user_id;
+var loadedSchedule = false;
 
 var profile_setup = false;
 var class_added = false;
@@ -194,11 +195,51 @@ function loadSchoolProfile(){
 
 }
 
-//
+//collaborate
+
+function loadChatBySchedule(){
+	if(!loadedSchedule){
+		var Schedule = Parse.Object.extend("Schedule");
+		var current_user = Parse.User.current();
+		var query = new Parse.Query(Schedule);
+		query.equalTo("user", current_user);
+		query.find({
+		success:function(result){
+			alert("SUCCESS");
+			var class_str = result[0].attributes.class;
+
+			var classes = [];
+			var index = 0;
+			var index2;
+			for(var i = 0 ; i < class_str.length; i++){
+				if(class_str.substring(i, i+1) == "|"){
+					index2 = i;
+					console.log(class_str.substring(index,index2));
+					classes.push(class_str.substring(index, index2));
+					console.log(classes);
+					index = index2 + 1;
+					console.log(index + "  " + index2);
+				}
+			}
+			for(var k = 0; k < classes.length; k++){
+				$("#chats").append("<li><a href='#' onclick = 'startChat()' style='margin-right:15%;margin-left:15%;'>"+ classes[k] +"</a></li><br>")
+			}
+			$("#chats").listview('refresh');
+		},
+		error:function(error){
+			console.log(error);
+		}
+		
+	});
+		loadedSchedule = true;
+	}else{
+
+	}
+}
 
 function startChat(){
 	var options = {
-		email: signup_email,
+		email:  "chui.luke99@outlook.com",
 	    iframe: false,
 	    tagid4iframe: "#chatFrame",
 	    iframewidth: "920px",
@@ -206,6 +247,7 @@ function startChat(){
 	    autostart_meet: false,
 	    autostart_note: false,
 	    start_chat: function(event) {
+	    	console.log(event.session_id);
 	        alert("Chat started session Id: " + event.session_id);
 	    },
 	    start_meet: function(event) {

@@ -112,11 +112,10 @@
   	</div>
 
   	<div data-role = "page" id = "feed" data-theme = "a">
-		<div data-role="panel" id="feedpanel" data-position="right" data-display="push" data-theme = "b">
+		<div data-role="panel" id="feedpanel" data-position="right" data-display="push" data-theme = "a">
 			<div class = "ui-panel-inner">
 				<center><h1>Options</h1></center>
-    			<a href="#profilepage" class="ui-btn">Profile</a>
-				<a href="#chatPage" class="ui-btn">Collaborate</a>
+				<a href="#chatPage" class="ui-btn" onclick = "loadChatBySchedule()">Collaborate</a>
 			</div>
 		</div>
 		<div data-role = "header">
@@ -134,7 +133,9 @@
 			<h1>Choose Chat by Class</h1>
 		</div>
 		<div data-role ="main" class ="ui-content" id = "chatPageContent">
-			
+			<br><br>
+			<ul data-role = "listview" id = "chats">
+			</ul>
 		</div>
 	</div>
 
