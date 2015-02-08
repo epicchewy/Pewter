@@ -185,6 +185,7 @@ function pushQuestion(){
 
 	post.set("class_", class_);
 	post.set("question", question);
+	post.set("school", signup_school);
 	post.set("user", current);
 	post.save(null, {
 		success:function(post){
@@ -200,14 +201,25 @@ function pushQuestion(){
 }
 
 function loadNewsFeed(){
-	var query = new Parse.Query(Parse.User);
+	var Post = Parse.Object.extend("Post");
+	var query = new Parse.Query(Post);
 	query.equalTo("school", signup_school);
 	query.find({
 		success: function(data){
 			console.log(data);
-			
+			for(var i = 0; i < data.length; i++){
+				console.log(data[0].attributes.class_);
+				console.log(data[0].attributes.question);
+				$("#feedlist").append("<li data-role = 'collapsible'><h1>"+data[i].attributes.class_ +"</h1><ul data-role='listview' id = 'feedlist2'><li>"+ data[i].attributes.question+"</li></ul><div data-role='fieldcontain'><label for='textarea'>Answer:</label><textarea cols='40' rows='8' name='textarea' id='textarea'></textarea></div> <button onclick='pushAnswer()'>Answer</button></li>");
+			}
+			$("#feedlist").listview('refresh');
+			$("#feedlist2").listview('refresh');
 		}
 	});
+}
+
+function pushAnswer(){
+	alert("answer pushed");
 }
 
 function loadActivityFeed(){
