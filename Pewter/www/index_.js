@@ -208,7 +208,6 @@ function loadNewsFeed(){
 	query.find({
 		success: function(data){
 			console.log(data);
-			console.log(data.length);
 			for(var i = 0; i < data.length; i++){
 				console.log(data[0].attributes.class_);
 				console.log(data[0].attributes.question);
@@ -228,10 +227,11 @@ function loadNewsFeed(){
 					$("#unordered_answers"+index).append("<li>"+data[index].attributes.answers[k]+"</li>");
 					
 				}
-				$("#feedlist2").listview('refresh');
-				$("#unordered_answers"+index).listview('refresh');
-				$("#feedlist").listview('refresh');
+				
 			}
+			$("#feedlist2").listview('refresh');
+			$("#unordered_answers"+index).listview('refresh');
+			$("#feedlist").listview('refresh');
 			
 		}
 	});
