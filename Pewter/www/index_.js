@@ -9,6 +9,7 @@ var loadedSchedule = false;
 
 var profile_setup = false;
 var class_added = false;
+var newsfeed_loaded = false;
 var schedule = [];
 
 $(function(){
@@ -19,9 +20,16 @@ $(function(){
 });
 
 function setUpProfile(){
-	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Name: "+ signup_first + "  "+ signup_last +"</center></li>");
-	$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>School: "+ signup_school+"</li>");
-	$("#profileList").listview('refresh');
+	if(profile_setup === false){
+		$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>Name: "+ signup_first + "  "+ signup_last +"</center></li>");
+		$("#profileList").append("<li style='margin-right:25%;margin-left:25%;'><center>School: "+ signup_school+"</li>");
+		profile_setup = true;
+		$("#profileList").listview('refresh');
+		
+	}else{
+		
+	}
+	
 }
 
 function takePhoto(){
@@ -183,6 +191,7 @@ function pushQuestion(){
 	var class_ = $("#question_subject").val();
 	var question = $("textarea#question_text").val();
 	var answers = [];
+
 	post.set("class_", class_);
 	post.set("question", question);
 	post.set("school", signup_school);
@@ -232,7 +241,6 @@ function loadNewsFeed(){
 			$("#feedlist2").listview('refresh');
 			$("#unordered_answers"+index).listview('refresh');
 			$("#feedlist").listview('refresh');
-			
 		}
 	});
 }
@@ -270,6 +278,10 @@ function loadSchoolProfile(){
 
 }
 
+function pushNotifications(){
+
+}
+
 //collaborate
 
 function loadChatBySchedule(){
@@ -280,7 +292,6 @@ function loadChatBySchedule(){
 		query.equalTo("user", current_user);
 		query.find({
 		success:function(result){
-			alert("SUCCESS");
 			var class_str = result[0].attributes.class;
 
 			var classes = [];
