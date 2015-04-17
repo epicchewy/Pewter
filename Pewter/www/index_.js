@@ -12,6 +12,21 @@ var class_added = false;
 var newsfeed_loaded = false;
 var schedule = [];
 
+//be careful about the asynchronous nature of the server calls make sure that the html gets rendered before functionality is applied
+
+/*------------------------------
+	TO-DO List (in arbitrary priority):
+		-Make pewter a parse app or establish its own domain
+		-Fix the live updates of student answers --> add extra call to parse server for the automatic listrefresh to add the student's new answer only when he adds a new answer
+			-do not refresh everytime a answer is pushed
+			-
+		-FIX THE CSS/LAYOUT/DESIGN --> change to bootstrap, move away from jquery mobile (HUGE)
+		-Add the notification functionality --> live push notifications for web and mobile (pusher or pubnub)
+		-Add the activity log --> have a track system set up with parse server
+		-Make the discussion chats for each school and link them to the collaborate functionality
+		-Add the takePhoto() function so people can take their profile picture
+------------------------------*/
+
 $(function(){
 	$("#searchingPicture").hide();
 	$("#dropdown_div").hide();
@@ -80,7 +95,7 @@ function checkSignUp(){
 	else{
 		var login_user = Parse.User.logIn(name, pass, {
   		success: function(user) {
-  			alert("Welcome", name);
+  			alert("Welcome to Pewter, ", name);
     		$.mobile.changePage("#feed");
 
   		},
@@ -241,8 +256,27 @@ function loadNewsFeed(){
 			$("#feedlist2").listview('refresh');
 			$("#unordered_answers"+index).listview('refresh');
 			$("#feedlist").listview('refresh');
+			refreshNewsFeed();
+		}, error: function (error){
+			alert("error: " error);
+		}
+
+	});
+
+}
+
+function refreshNewsFeed(){
+	var Post = Parse.Object.extend("Post");
+	var query = new Parse.Query(Post);
+	query.equalTo("school", signup_school);
+	query.find({
+		success:function(data){
+			//have to refresh after new comment is pushed
+		},error:function(error){
+
 		}
 	});
+
 }
 
 function pushAnswer(ID, val, question,answer){
@@ -254,7 +288,7 @@ function pushAnswer(ID, val, question,answer){
 			result[0].add("answers",answer);
 			result[0].save({
 				success:function(data){
-
+					refreshNewsFeed();
 				},
 				error:function(error){
 				}
@@ -271,7 +305,14 @@ function loadActivityFeed(){
 }
 
 function loadNotifications(){
+	var Notification = new Parse.Object.extend("Notifications");
+	var curret_user = new Parse.User.current();
+	var query = new Parse.Query(Notification);
 
+}
+
+function receiveNotifications(){
+	
 }
 
 function loadSchoolProfile(){
